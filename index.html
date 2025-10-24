@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catálogo - Impresiones 3D</title>
+  <title>Catálogo</title>
   <meta name="description" content="Catálogo de productos impresos en 3D: figuras, accesorios, prototipos y más." />
   <style>
     :root{
@@ -170,10 +170,10 @@
   <div class="wrap" role="application">
     <header>
       <div class="brand" aria-hidden="false">
-        <div class="logo">3D</div>
+        <div class="logo">•NF3•</div>
         <div>
-          <h1>Impresiones 3D MX</h1>
-          <p class="lead">Figuras, prototipos y accesorios personalizados</p>
+          <h1>NeoForge3D</h1>
+          <p class="lead">Servicio de impresiones 3D</p>
         </div>
       </div>
 
@@ -183,7 +183,7 @@
           <input id="search" placeholder="Buscar producto..." aria-label="Buscar producto" />
         </div>
 
-        <select id="sort" class="select" aria-label="Ordenar">
+       <select id="sort" class="select" aria-label="Ordenar">
           <option value="default">Orden: Recomendados</option>
           <option value="price-asc">Precio: menor a mayor</option>
           <option value="price-desc">Precio: mayor a menor</option>
@@ -211,21 +211,22 @@
             <option value="PLA">PLA</option>
             <option value="ABS">ABS</option>
             <option value="PETG">PETG</option>
-            <option value="Resina">Resina</option>
+            <option value="TPU">TPU</option>
+            <option value="Nylon-CF">Nylon-CF</option>
           </select>
         </div>
 
         <div style="margin-top:12px">
-          <label style="font-size:13px;color:var(--muted)">Rango de precio</label>
+          <label style="font-size:13px;color:var(--muted)">Rango del precio</label>
           <div style="display:flex;gap:8px;margin-top:8px">
-            <input id="minPrice" type="number" placeholder="Min" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit">
-            <input id="maxPrice" type="number" placeholder="Max" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit">
+            <input id="minPrice" type="number" placeholder="Mínimo" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit">
+            <input id="maxPrice" type="number" placeholder="Máximo" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit">
           </div>
         </div>
 
         <div style="margin-top:12px;display:flex;gap:8px">
-          <button id="applyFilters" class="btn small">Aplicar</button>
-          <button id="clearFilters" class="btn small">Limpiar</button>
+          <button id="applyFilters" class="btn small">Buscar</button>
+          <button id="clearFilters" class="btn small">Borrar</button>
         </div>
 
       </aside>
@@ -233,10 +234,10 @@
       <section>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <div>
-            <h2 style="margin:0">Catálogo</h2>
+            <h2 style="margin:0">Productos</h2>
             <div class="muted" style="font-size:13px;margin-top:4px" id="resultsInfo">Mostrando productos</div>
           </div>
-          <div class="muted" style="font-size:13px">Envío y personalizaciones disponibles</div>
+          <div class="muted" style="font-size:13px">Envíos por paquetería y opción de personalizacion disponibles</div>
         </div>
 
         <div class="product-grid" id="productGrid" role="list">
@@ -247,8 +248,8 @@
 
     <footer>
       <div>
-        <strong>Impresiones 3D MX</strong>
-        <div class="muted" style="font-size:13px">Hecho a la medida • Producción local</div>
+        <strong>NeoForge3D</strong>
+        <div class="muted" style="font-size:13px">Hecho a medida • Producción local TQXQC</div>
       </div>
       <div class="muted" style="font-size:13px">¿Tienes un diseño? Envíalo y cotizamos</div>
     </footer>
@@ -498,3 +499,4 @@
   </script>
 </body>
 </html>
+
