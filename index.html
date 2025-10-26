@@ -1,503 +1,404 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catálogo</title>
-  <meta name="description" content="Catálogo de productos impresos en 3D: figuras, accesorios, prototipos y más." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NeoForge3D — Catálogo</title>
+  <meta name="description" content="Catálogo de productos impresos en 3D | NeoForge3D" />
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --accent:#ff6b6b;
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.03);
-      --radius:12px;
-      --maxwidth:1100px;
-      --gap:18px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color-scheme: dark;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background: linear-gradient(180deg,#071026 0%, #081226 50%, #03121a 100%);
-      color:#e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:28px;
-      display:flex;
-      justify-content:center;
+      --bg1:#05070a;
+      --bg2:#071428;
+      --neon:#00ffea;
+      --accent:#7c4dff;
+      --glass: rgba(255,255,255,0.04);
+      --card: rgba(255,255,255,0.03);
+      --muted: #a9b0be;
+      --radius:14px;
+      --maxw:1200px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    .wrap{
-      width:100%;
-      max-width:var(--maxwidth);
-    }
+    html,body{height:100%;margin:0;background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(124,77,255,0.08), transparent 10%),
+      radial-gradient(800px 400px at 90% 80%, rgba(0,255,234,0.03), transparent 10%),
+      linear-gradient(180deg,var(--bg1),var(--bg2)); color:#e8f0ff; -webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--maxw);margin:32px auto;padding:28px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 10px 40px rgba(2,6,23,0.6);backdrop-filter: blur(6px);}
 
-    header{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      margin-bottom:20px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
     .logo{
-      width:56px;
-      height:56px;
-      border-radius:10px;
-      background:linear-gradient(135deg,var(--accent),#ff9a76);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:#071426;
-      box-shadow: 0 6px 20px rgba(255,107,107,0.12);
-      flex-shrink:0;
+      width:56px;height:56px;border-radius:12px;background:
+      conic-gradient(from 220deg, var(--accent), var(--neon));display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.5), 0 0 18px rgba(124,77,255,0.08) inset;
+      color:#071428;font-weight:700;font-size:18px;
     }
-    h1{font-size:18px;margin:0}
-    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .title{line-height:1}
+    .title h1{margin:0;font-size:18px;letter-spacing:0.6px}
+    .title p{margin:0;margin-top:2px;color:var(--muted);font-size:13px}
 
-    .controls{
-      margin-left:auto;
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-
-    .search{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background:var(--glass);
-      padding:6px 10px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,0.04);
-    }
-    .search input{
-      background:transparent;border:0;color:inherit;outline:none;width:200px;
-    }
-
+    nav{display:flex;gap:10px;align-items:center}
     .btn{
-      background:transparent;border:1px solid rgba(255,255,255,0.06);
-      padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;font-size:14px;
+      display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      padding:10px 14px;border-radius:12px;color:var(--neon);border:1px solid rgba(0,255,234,0.08);text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s;
     }
-    .btn.primary{
-      background:linear-gradient(90deg,var(--accent),#ff9a76);
-      color:#071426;border:0;box-shadow:0 6px 18px rgba(255,107,107,0.12);
+    .btn:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,255,234,0.06)}
+    .btn.secondary{color:#cfcfff;border:1px solid rgba(124,77,255,0.08);background:transparent}
+
+    /* Hero */
+    .hero{display:flex;align-items:center;justify-content:space-between;margin-top:22px;gap:20px}
+    .hero-left{max-width:640px}
+    .hero h2{margin:0;font-size:32px;line-height:1.02}
+    .hero p{color:var(--muted);margin-top:8px;font-size:15px}
+    .searchbar{margin-top:16px;display:flex;gap:8px;align-items:center}
+    .searchbar input{
+      flex:1;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:14px;
+      outline:none;box-shadow:inset 0 0 18px rgba(0,0,0,0.4);
+    }
+    .searchbar .select{
+      padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);color:var(--muted)
     }
 
-    /* Layout */
-    main{display:grid;grid-template-columns:260px 1fr;gap:var(--gap);align-items:start}
-    @media (max-width:900px){
-      main{grid-template-columns:1fr}
-      .filters{order:2}
-      .product-grid{order:1}
-      .search input{width:120px}
+    .hero-right{
+      width:220px;height:160px;border-radius:16px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(124,77,255,0.02));
+      display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(124,77,255,0.04);position:relative;overflow:hidden;
+      border:1px solid rgba(255,255,255,0.02)
     }
+    .neon-ring{position:absolute;inset:-30% -20% auto auto;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(0,255,234,0.14), transparent 20%);filter:blur(18px);opacity:0.9;}
+    .hero-right img{width:70%;transform:rotate(-10deg);filter:drop-shadow(0 12px 30px rgba(0,0,0,0.7))}
 
-    /* Filters */
-    .filters{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      padding:16px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.03);
-      height:fit-content;
-    }
-    .filters h3{margin:0 0 12px 0;font-size:14px}
-    .categories{display:flex;flex-direction:column;gap:8px}
-    .chip{
-      padding:8px 10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);
-      color:var(--muted);cursor:pointer;text-align:left;font-size:13px;
-    }
-    .chip.active{
-      background:rgba(255,107,107,0.12);
-      color:var(--accent);
-      border-color:rgba(255,107,107,0.12);
-    }
-    .select{
-      width:100%;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)
-    }
+    /* Grid */
+    .controls{display:flex;align-items:center;justify-content:space-between;margin-top:26px;gap:12px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:14px}
 
-    /* Product grid */
-    .product-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-      gap:var(--gap);
-    }
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.03);
-      display:flex;flex-direction:column;gap:12px;
-      transition:transform .15s ease, box-shadow .15s ease;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .16s ease, box-shadow .16s ease;
+      display:flex;flex-direction:column;gap:12px;min-height:320px;
     }
-    .card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(2,6,23,0.6)}
-    .thumb{
-      height:150px;border-radius:10px;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,0.03)
-    }
-    .title{font-weight:600;font-size:15px;margin:0}
-    .meta{color:var(--muted);font-size:13px;margin-top:-6px}
-    .price-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-    .price{font-weight:700;color:var(--accent)}
-    .card .actions{display:flex;gap:8px}
-    .small{font-size:13px;padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted);cursor:pointer}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .meta h3{margin:0;font-size:16px}
+    .price{color:var(--neon);font-weight:700}
+    .tags{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+
+    /* Actions: botones reducidos (aprox. mitad del tamaño original visual) */
+    .actions{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
+    .actions .btn{flex:1 1 calc(50% - 8px);padding:8px 10px;border-radius:10px;font-size:13px}
+    .primary{background:linear-gradient(90deg,var(--neon),var(--accent));color:#071428;font-weight:700;border:none}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#cfeff0}
+    .qty-input{width:86px;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;text-align:center}
 
     /* Modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(3,6,16,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
-    .modal{max-width:900px;width:100%;background:linear-gradient(180deg,#071226,#071425);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.04);display:grid;grid-template-columns:1fr 320px;gap:16px}
-    @media (max-width:900px){ .modal{grid-template-columns:1fr} }
-    .modal .big-img{height:360px;border-radius:10px;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,0.04)}
-    .modal h2{margin:0}
-    .modal p{color:var(--muted)}
-    .modal .order{display:flex;flex-direction:column;gap:10px}
-    .qty{display:flex;align-items:center;gap:8px}
-    .qty input{width:72px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
-    .close{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:16px}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+    .modal{width:100%;max-width:920px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:18px;color:inherit}
+    .modal img{width:48%;height:auto;border-radius:10px;object-fit:cover}
+    .modal .info{flex:1;display:flex;flex-direction:column;gap:12px}
+    .close{margin-left:auto;background:transparent;border:none;color:var(--muted);font-weight:700;cursor:pointer}
 
-    footer{
-      margin-top:20px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.03)
+    /* Floating WhatsApp */
+    .wa-fab{position:fixed;right:20px;bottom:20px;background:linear-gradient(180deg,#00e5c9,#00bfa5);color:#061018;padding:14px;border-radius:999px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5);z-index:80;text-decoration:none}
+    .wa-fab span{font-weight:700}
+
+    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center;padding:12px 0}
+
+    @media (max-width:720px){
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero-right{width:100%;height:140px}
+      .modal{flex-direction:column}
+      .modal img{width:100%}
+      .actions .btn{flex:1 1 100%}
     }
-
-    /* utility */
-    .muted{color:var(--muted)}
-    a{color:inherit;text-decoration:none}
   </style>
 </head>
 <body>
-  <div class="wrap" role="application">
+  <div class="wrap">
     <header>
-      <div class="brand" aria-hidden="false">
-        <div class="logo">•NF3•</div>
-        <div>
+      <div class="brand">
+        <div class="logo">N3D</div>
+        <div class="title">
           <h1>NeoForge3D</h1>
-          <p class="lead">Servicio de impresiones 3D</p>
+          <p>Impresión 3D, prototipos y piezas personalizadas</p>
         </div>
       </div>
-
-      <div class="controls" role="region" aria-label="Controles">
-        <div class="search" title="Buscar productos">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="#9fb2c9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="#9fb2c9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <input id="search" placeholder="Buscar producto..." aria-label="Buscar producto" />
-        </div>
-
-       <select id="sort" class="select" aria-label="Ordenar">
-          <option value="default">Orden: Recomendados</option>
-          <option value="price-asc">Precio: menor a mayor</option>
-          <option value="price-desc">Precio: mayor a menor</option>
-        </select>
-
-        <button class="btn primary" id="contactBtn">Contacto</button>
-      </div>
+      <nav>
+        <a class="btn" id="btn-catalog">Catálogo</a>
+        <a class="btn secondary" id="btn-sobre">Sobre nosotros</a>
+        <a class="btn" id="btn-contact">Contactar</a>
+      </nav>
     </header>
 
-    <main>
-      <aside class="filters" aria-labelledby="filtrosTitle">
-        <h3 id="filtrosTitle">Filtros</h3>
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Diseños, precisión y materialidad para la próxima era</h2>
+        <p>NeoForge3D ofrece piezas personalizadas, prototipos funcionales y producción a medida. Solicita cotización o compra directamente por WhatsApp.</p>
 
-        <div style="margin-bottom:12px">
-          <label style="font-size:13px;color:var(--muted)">Categorías</label>
-          <div class="categories" id="categoryList">
-            <!-- Chips generadas por JS -->
-          </div>
-        </div>
-
-        <div style="margin-top:10px">
-          <label style="font-size:13px;color:var(--muted)">Material</label>
-          <select id="material" class="select" aria-label="Filtrar por material">
-            <option value="any">Cualquiera</option>
-            <option value="PLA">PLA</option>
-            <option value="ABS">ABS</option>
-            <option value="PETG">PETG</option>
-            <option value="TPU">TPU</option>
-            <option value="Nylon-CF">Nylon-CF</option>
+        <div class="searchbar" role="search">
+          <input id="search" placeholder="Buscar producto, ejemplo: 'robot', 'drone', 'llavero'..." />
+          <select id="category" class="select">
+            <option value="">Todos</option>
+            <option value="decor">Decoración</option>
+            <option value="industrial">Industrial</option>
+            <option value="prototipo">Prototipo</option>
+            <option value="accesorio">Accesorio</option>
           </select>
+          <select id="sort" class="select" title="Ordenar por precio">
+            <option value="">Ordenar</option>
+            <option value="low">Precio: menor a mayor</option>
+            <option value="high">Precio: mayor a menor</option>
+          </select>
+          <button class="btn" id="clear">Limpiar</button>
         </div>
+      </div>
 
-        <div style="margin-top:12px">
-          <label style="font-size:13px;color:var(--muted)">Rango del precio</label>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <input id="minPrice" type="number" placeholder="Min" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit">
-            <input id="maxPrice" type="number" placeholder="Max" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit">
-          </div>
-        </div>
+      <div class="hero-right">
+        <div class="neon-ring"></div>
+        <img src="images/hero-sample.png" alt="NeoForge3D muestra" />
+      </div>
+    </section>
 
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button id="applyFilters" class="btn small">Buscar</button>
-          <button id="clearFilters" class="btn small">Borrar</button>
-        </div>
+    <section class="controls">
+      <div class="filters">
+        <button class="btn secondary" data-filter="">Todos</button>
+        <button class="btn secondary" data-filter="decor">Decoración</button>
+        <button class="btn secondary" data-filter="industrial">Industrial</button>
+        <button class="btn secondary" data-filter="prototipo">Prototipo</button>
+        <button class="btn secondary" data-filter="accesorio">Accesorio</button>
+      </div>
+      <div style="color:var(--muted);font-size:13px">Envío y cotizaciones vía WhatsApp</div>
+    </section>
 
-      </aside>
-
-      <section>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div>
-            <h2 style="margin:0">Productos</h2>
-            <div class="muted" style="font-size:13px;margin-top:4px" id="resultsInfo">Mostrando productos</div>
-          </div>
-          <div class="muted" style="font-size:13px">Envíos por paquetería y opción de personalizacion disponibles</div>
-        </div>
-
-        <div class="product-grid" id="productGrid" role="list">
-          <!-- Cards generadas por JS -->
-        </div>
-      </section>
+    <main id="catalog" class="grid" aria-live="polite">
+      <!-- Productos generados por JS -->
     </main>
 
     <footer>
-      <div>
-        <strong>NeoForge3D</strong>
-        <div class="muted" style="font-size:13px">Hecho a medida • Producción local TQXQC</div>
-      </div>
-      <div class="muted" style="font-size:13px">¿Tienes un diseño? Envíalo y cotizamos</div>
+      © <strong>NeoForge3D</strong> — Fabricación aditiva y soluciones 3D. Imágenes locales en /images. Botones abren WhatsApp.
     </footer>
   </div>
 
   <!-- Modal detalle -->
-  <div class="modal-backdrop" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal" role="document" aria-labelledby="modalTitle">
-      <div>
-        <div class="big-img" id="modalImg" style="background-image:url('https://via.placeholder.com/800x600')"></div>
-        <div style="margin-top:10px;color:var(--muted);font-size:13px" id="modalDesc">Descripción</div>
-      </div>
-
-      <div class="order">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <h2 id="modalTitle">Producto</h2>
-          <button class="close" id="closeModal" aria-label="Cerrar">✕</button>
+  <div class="modal-backdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <img id="modal-img" src="" alt="">
+      <div class="info">
+        <div style="display:flex;gap:12px;align-items:center">
+          <h3 id="modal-title" style="margin:0"></h3>
+          <button class="close" id="modal-close">Cerrar ✕</button>
         </div>
-        <div class="muted" id="modalCategory">Categoría</div>
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:18px;font-weight:700;color:var(--accent)" id="modalPrice">$0.00</div>
-          <div class="muted" id="modalMaterial">Material</div>
+        <div id="modal-desc" style="color:var(--muted)"></div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="price" id="modal-price"></div>
+          <div style="color:var(--muted);font-size:13px">Materiales: <span id="modal-material"></span></div>
         </div>
 
-        <div class="qty">
-          <label style="min-width:48px" for="qty">Cantidad</label>
-          <input id="qty" type="number" min="1" value="1" />
+        <div style="display:flex;gap:10px;align-items:center">
+          <label style="color:var(--muted);font-size:13px">Cantidad:</label>
+          <input id="modal-qty" class="qty-input" type="number" min="1" value="1" />
         </div>
 
-        <div style="display:flex;gap:8px">
-          <button id="addCart" class="btn primary">Pedir</button>
-          <button id="quote" class="btn">Solicitar cotización</button>
-        </div>
-
-        <div style="margin-top:auto;color:var(--muted);font-size:13px">
-          Para pedidos personalizados o grandes volúmenes, contáctanos al correo: ventas@impresiones3dmx.example
+        <div style="display:flex;gap:10px;margin-top:auto">
+          <button class="btn primary" id="btn-buy-modal">Comprar por WhatsApp</button>
+          <button class="btn ghost" id="btn-quote-modal">Solicitar cotización</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- WhatsApp flotante -->
+  <a class="wa-fab" id="wa-fab" href="#" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 16.5v3a1.5 1.5 0 0 1-1.7 1.48c-9.38-.97-16.92-8.52-17.9-17.9A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.64c0 .3-.05.6-.15.88l-.9 2.33a1.5 1.5 0 0 0 .35 1.6l2.2 2.2a1.5 1.5 0 0 0 1.6.35l2.33-.9c.28-.1.58-.15.88-.15A1.5 1.5 0 0 1 21 16.5z" fill="#061018" />
+    </svg>
+    <span>Contactar</span>
+  </a>
+
   <script>
-    // Datos de ejemplo (reemplaza con tus imágenes y datos reales)
-    const products = [
-      {id:1,title:"Figura de Dragon 20cm",category:"Figuras",material:"PLA",price:420,desc:"Figura detallada impresa en PLA, acabado lijado y pintado opcional.",img:"https://via.placeholder.com/600x400?text=Dragon"},
-      {id:2,title:"Soporte para Auriculares",category:"Accesorios",material:"PLA",price:120,desc:"Soporte compacto para auriculares con espacio para cable.",img:"https://via.placeholder.com/600x400?text=Soporte"},
-      {id:3,title:"Pieza de Prototipo A1",category:"Prototipos",material:"PETG",price:650,desc:"Prototipo funcional impreso en PETG, resistente y dimensionalmente estable.",img:"https://via.placeholder.com/600x400?text=Prot+A1"},
-      {id:4,title:"Llaveros Personalizados (pack 5)",category:"Accesorios",material:"Resina",price:180,desc:"Llaveros personalizados con nombre o logo (pack de 5).",img:"https://via.placeholder.com/600x400?text=Llaveros"},
-      {id:5,title:"Soporte para Planta 3D",category:"Decoración",material:"PLA",price:300,desc:"Maceta/soporte impreso a medida para interiores.",img:"https://via.placeholder.com/600x400?text=Planta"},
-      {id:6,title:"Miniatura de Vehículo 1:64",category:"Figuras",material:"Resina",price:220,desc:"Miniatura detallada para coleccionistas.",img:"https://via.placeholder.com/600x400?text=Miniatura"},
-      {id:7,title:"Carcasa Personalizada para PCB",category:"Prototipos",material:"ABS",price:510,desc:"Carcasa diseñada e impresa para tu placa electrónica.",img:"https://via.placeholder.com/600x400?text=Carcasa"},
-      {id:8,title:"Riel Modular - Conector",category:"Componentes",material:"PLA",price:90,desc:"Conector modular para ensamblar rieles y estructuras.",img:"https://via.placeholder.com/600x400?text=Conector"}
+    // CONFIG: reemplaza por tu número en formato internacional sin '+' ni espacios
+    const PHONE = "15551234567"; // EJ: "521234567890" (52 = México)
+    const waBase = (text) => "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text);
+
+    // Productos (agregar propiedad precioNum para ordenar)
+    const productos = [
+      { id: "ng3d-001", nombre: "Mini Robot Neo", imagen: "images/mini-robot.jpg", precio: "USD 45", precioNum: 45, categoria: "decor", material: "PLA / Resina", descripcion: "Figura decorativa con articulaciones impresas. Ideal para prototipos y exposición." },
+      { id: "ng3d-002", nombre: "Soporte Drone - Light", imagen: "images/drone-frame.jpg", precio: "USD 120", precioNum: 120, categoria: "industrial", material: "Nylon reforzado", descripcion: "Armazón ligero para drones, optimizado para ABS o nylon. Diseño resistente y modular." },
+      { id: "ng3d-003", nombre: "Llaveros Personalizados", imagen: "images/custom-keychain.jpg", precio: "USD 8", precioNum: 8, categoria: "accesorio", material: "PLA / PETG", descripcion: "Llaveros personalizados con texto o logo. Pedido mínimo 10 unidades." },
+      { id: "ng3d-004", nombre: "Engranaje de Precisión", imagen: "images/gear.jpg", precio: "USD 25", precioNum: 25, categoria: "industrial", material: "PETG / Nylon", descripcion: "Engranaje impreso para pruebas funcionales y prototipos mecánicos." },
+      { id: "ng3d-005", nombre: "Modelo Arquitectónico", imagen: "images/architectural-model.jpg", precio: "USD 220", precioNum: 220, categoria: "prototipo", material: "PLA", descripcion: "Maqueta arquitectónica a escala con detalle de fachadas y relieves." },
+      { id: "ng3d-006", nombre: "Prototipo Técnico A", imagen: "images/prototype.jpg", precio: "USD 95", precioNum: 95, categoria: "prototipo", material: "ABS / Nylon", descripcion: "Prototipo funcional para pruebas de encaje y tolerancia." }
     ];
 
-    const categorySet = ["Todos", ...Array.from(new Set(products.map(p=>p.category)))];
-    // Referencias DOM
-    const productGrid = document.getElementById('productGrid');
-    const categoryList = document.getElementById('categoryList');
-    const searchInput = document.getElementById('search');
+    // DOM refs
+    const catalog = document.getElementById('catalog');
+    const search = document.getElementById('search');
+    const category = document.getElementById('category');
+    const filters = document.querySelectorAll('[data-filter]');
+    const clear = document.getElementById('clear');
+    const backdrop = document.getElementById('backdrop');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalPrice = document.getElementById('modal-price');
+    const modalMaterial = document.getElementById('modal-material');
+    const modalClose = document.getElementById('modal-close');
+    const btnBuyModal = document.getElementById('btn-buy-modal');
+    const btnQuoteModal = document.getElementById('btn-quote-modal');
+    const waFab = document.getElementById('wa-fab');
     const sortSelect = document.getElementById('sort');
-    const materialSelect = document.getElementById('material');
-    const minPriceInput = document.getElementById('minPrice');
-    const maxPriceInput = document.getElementById('maxPrice');
-    const applyFiltersBtn = document.getElementById('applyFilters');
-    const clearFiltersBtn = document.getElementById('clearFilters');
-    const resultsInfo = document.getElementById('resultsInfo');
+    const modalQty = document.getElementById('modal-qty');
 
-    // Modal refs
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalPrice = document.getElementById('modalPrice');
-    const modalCategory = document.getElementById('modalCategory');
-    const modalMaterial = document.getElementById('modalMaterial');
-    const qtyInput = document.getElementById('qty');
-
-    let activeCategory = "Todos";
-    let filtered = [...products];
-
-    // Generar chips de categoría
-    function renderCategories(){
-      categoryList.innerHTML = '';
-      categorySet.forEach(cat=>{
-        const btn = document.createElement('button');
-        btn.className = 'chip' + (cat===activeCategory ? ' active' : '');
-        btn.textContent = cat;
-        btn.addEventListener('click',()=>{
-          activeCategory = cat;
-          document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-          btn.classList.add('active');
-          applyFilters();
-        });
-        categoryList.appendChild(btn);
-      });
-    }
-
-    // Render productos a la grid
-    function renderProducts(list){
-      productGrid.innerHTML = '';
+    // Renderiza productos
+    function render(list){
+      catalog.innerHTML = '';
       if(list.length === 0){
-        productGrid.innerHTML = '<div class="muted">No se encontraron productos con los filtros seleccionados.</div>';
-        resultsInfo.textContent = '0 productos';
+        catalog.innerHTML = '<div style="color:var(--muted);padding:20px;border-radius:12px;background:var(--card);grid-column:1/-1">No se encontraron productos.</div>';
         return;
       }
-      resultsInfo.textContent = `Mostrando ${list.length} producto(s)`;
       list.forEach(p=>{
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.setAttribute('role','listitem');
+        const el = document.createElement('article');
+        el.className = 'card';
+        el.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <div class="meta">
+            <h3>${p.nombre}</h3>
+            <div class="price">${p.precio}</div>
+          </div>
+          <div style="color:var(--muted);font-size:13px">${p.descripcion}</div>
+          <div class="tags">
+            <div class="tag">${p.categoria}</div>
+            <div class="tag">${p.material}</div>
+          </div>
 
-        // Miniatura
-        const thumb = document.createElement('div');
-        thumb.className = 'thumb';
-        thumb.style.backgroundImage = `url('${p.img}')`;
-        card.appendChild(thumb);
+          <div style="display:flex;gap:10px;align-items:center">
+            <label style="color:var(--muted);font-size:13px;margin-right:6px">Cantidad:</label>
+            <input type="number" min="1" value="1" class="qty-input qty" data-id="${p.id}">
+          </div>
 
-        const title = document.createElement('h3');
-        title.className = 'title';
-        title.textContent = p.title;
-        card.appendChild(title);
-
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-        meta.textContent = `${p.category} • ${p.material}`;
-        card.appendChild(meta);
-
-        const priceRow = document.createElement('div');
-        priceRow.className = 'price-row';
-        const price = document.createElement('div');
-        price.className = 'price';
-        price.textContent = `$${p.price.toFixed(2)}`;
-        priceRow.appendChild(price);
-
-        const actions = document.createElement('div');
-        actions.className = 'actions';
-        const viewBtn = document.createElement('button');
-        viewBtn.className = 'small';
-        viewBtn.textContent = 'Ver';
-        viewBtn.addEventListener('click', ()=> openModal(p));
-        const orderBtn = document.createElement('button');
-        orderBtn.className = 'small';
-        orderBtn.textContent = 'Pedir';
-        orderBtn.addEventListener('click', ()=> openModal(p, true));
-        actions.appendChild(viewBtn);
-        actions.appendChild(orderBtn);
-
-        priceRow.appendChild(actions);
-        card.appendChild(priceRow);
-
-        productGrid.appendChild(card);
+          <div class="actions">
+            <button class="btn primary" data-buy="${p.id}">Comprar</button>
+            <button class="btn ghost" data-quote="${p.id}">Cotizar</button>
+            <button class="btn secondary" data-view="${p.id}">Ver</button>
+          </div>
+        `;
+        catalog.appendChild(el);
       });
     }
 
-    // Aplicar filtros y búsqueda
-    function applyFilters(){
-      const q = searchInput.value.trim().toLowerCase();
-      const sortBy = sortSelect.value;
-      const material = materialSelect.value;
-      const minP = parseFloat(minPriceInput.value) || 0;
-      const maxP = parseFloat(maxPriceInput.value) || Infinity;
-
-      filtered = products.filter(p=>{
-        if(activeCategory !== "Todos" && p.category !== activeCategory) return false;
-        if(material !== 'any' && p.material !== material) return false;
-        if(p.price < minP || p.price > maxP) return false;
-        if(q && !(p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))) return false;
-        return true;
+    // Filtrado, búsqueda y ordenamiento
+    function filterAndSearch(){
+      const q = search.value.trim().toLowerCase();
+      const cat = category.value;
+      const sort = sortSelect.value;
+      let filtered = productos.filter(p=>{
+        const matchQ = !q || (p.nombre + ' ' + p.descripcion + ' ' + p.material).toLowerCase().includes(q);
+        const matchCat = !cat || p.categoria === cat;
+        return matchQ && matchCat;
       });
 
-      if(sortBy === 'price-asc') filtered.sort((a,b)=>a.price-b.price);
-      else if(sortBy === 'price-desc') filtered.sort((a,b)=>b.price-a.price);
+      if(sort === 'low'){
+        filtered.sort((a,b) => a.precioNum - b.precioNum);
+      } else if(sort === 'high'){
+        filtered.sort((a,b) => b.precioNum - a.precioNum);
+      }
 
-      renderProducts(filtered);
+      render(filtered);
     }
 
-    // Limpiar filtros
-    function clearFilters(){
-      activeCategory = "Todos";
-      document.getElementById('material').value = 'any';
-      document.getElementById('minPrice').value = '';
-      document.getElementById('maxPrice').value = '';
-      searchInput.value = '';
-      sortSelect.value = 'default';
-      renderCategories();
-      applyFilters();
-    }
+    // Delegate clicks en catálogo
+    catalog.addEventListener('click', (e)=>{
+      const buyId = e.target.getAttribute('data-buy');
+      const quoteId = e.target.getAttribute('data-quote');
+      const viewId = e.target.getAttribute('data-view');
 
-    // Modal abrir
-    function openModal(product, focusQty=false){
-      modalImg.style.backgroundImage = `url('${product.img}')`;
-      modalTitle.textContent = product.title;
-      modalDesc.textContent = product.desc;
-      modalPrice.textContent = `$${product.price.toFixed(2)}`;
-      modalCategory.textContent = product.category;
-      modalMaterial.textContent = product.material;
-      qtyInput.value = 1;
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden','false');
-
-      // Si se abrió con "Pedir", enfocar cantidad
-      if(focusQty) setTimeout(()=> qtyInput.focus(), 200);
-
-      // Handler para pedir: abre mail con datos básicos (puede reemplazarse por tu backend)
-      document.getElementById('addCart').onclick = ()=>{
-        const qty = parseInt(qtyInput.value) || 1;
-        const subject = encodeURIComponent(`Pedido: ${product.title} x${qty}`);
-        const body = encodeURIComponent(`Hola,%0A%0ADeseo pedir:%0A- Producto: ${product.title}%0A- Cantidad: ${qty}%0A- Precio unitario: $${product.price.toFixed(2)}%0A%0AMis datos de contacto:%0A(Nombre, teléfono, dirección)...%0A%0AGracias.`);
-        window.location.href = `mailto:ventas@impresiones3dmx.example?subject=${subject}&body=${body}`;
-      };
-
-      document.getElementById('quote').onclick = ()=>{
-        const qty = parseInt(qtyInput.value) || 1;
-        const subject = encodeURIComponent(`Cotización: ${product.title} x${qty}`);
-        const body = encodeURIComponent(`Solicito cotización:%0A- Producto: ${product.title}%0A- Cantidad: ${qty}%0A%0AGracias.`);
-        window.location.href = `mailto:ventas@impresiones3dmx.example?subject=${subject}&body=${body}`;
-      };
-    }
-
-    // Cerrar modal
-    document.getElementById('closeModal').addEventListener('click', ()=>{
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden','true');
-    });
-    // click fuera para cerrar
-    modal.addEventListener('click', (e)=>{
-      if(e.target === modal){
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden','true');
+      if(buyId){
+        const prod = productos.find(x=>x.id===buyId);
+        // tomar cantidad desde el input asociado
+        const qtyInput = document.querySelector(`.qty[data-id="${buyId}"]`);
+        const qty = (qtyInput && Math.max(1, parseInt(qtyInput.value || 1))) || 1;
+        const text = `Hola NeoForge3D, deseo comprar el producto: ${prod.nombre} (${prod.id}) - Precio: ${prod.precio}. Cantidad: ${qty}. ¿Está disponible?`;
+        window.open(waBase(text),'_blank');
+      } else if(quoteId){
+        const prod = productos.find(x=>x.id===quoteId);
+        const qtyInput = document.querySelector(`.qty[data-id="${quoteId}"]`);
+        const qty = (qtyInput && Math.max(1, parseInt(qtyInput.value || 1))) || 1;
+        const text = `Hola NeoForge3D, solicito cotización para: ${prod.nombre} (${prod.id}). Cantidad: ${qty}, acabado ___, tiempo de entrega ___.`;
+        window.open(waBase(text),'_blank');
+      } else if(viewId){
+        openModal(productos.find(x=>x.id===viewId));
       }
     });
 
-    // Eventos UI
-    searchInput.addEventListener('input', ()=> applyFilters());
-    sortSelect.addEventListener('change', ()=> applyFilters());
-    applyFiltersBtn.addEventListener('click', ()=> applyFilters());
-    clearFiltersBtn.addEventListener('click', ()=> clearFilters());
+    // Modal
+    let currentModalProduct = null;
+    function openModal(prod){
+      currentModalProduct = prod;
+      modalImg.src = prod.imagen;
+      modalImg.alt = prod.nombre;
+      modalTitle.textContent = prod.nombre;
+      modalDesc.textContent = prod.descripcion;
+      modalPrice.textContent = prod.precio;
+      modalMaterial.textContent = prod.material;
+      modalQty.value = 1;
+      backdrop.style.display = 'flex';
+      backdrop.setAttribute('aria-hidden','false');
 
-    // Contact button quick scroll to mailto
-    document.getElementById('contactBtn').addEventListener('click', ()=> {
-      window.location.href = 'mailto:ventas@impresiones3dmx.example?subject=Consulta%20de%20producto';
+      btnBuyModal.onclick = ()=>{
+        const qty = Math.max(1, parseInt(modalQty.value || 1));
+        const text = `Hola NeoForge3D, deseo comprar: ${prod.nombre} (${prod.id}) - Precio: ${prod.precio}. Cantidad: ${qty}`;
+        window.open(waBase(text),'_blank');
+      };
+      btnQuoteModal.onclick = ()=>{
+        const qty = Math.max(1, parseInt(modalQty.value || 1));
+        const text = `Hola NeoForge3D, solicito cotización para: ${prod.nombre} (${prod.id}). Cantidad: ${qty}, acabado: ___, plazo: ___`;
+        window.open(waBase(text),'_blank');
+      };
+    }
+    modalClose.addEventListener('click', ()=>{backdrop.style.display='none';backdrop.setAttribute('aria-hidden','true')});
+    backdrop.addEventListener('click',(e)=>{ if(e.target === backdrop){ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true') } });
+
+    // Filtros rápidos
+    filters.forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const cat = btn.getAttribute('data-filter');
+        category.value = cat || '';
+        filterAndSearch();
+      })
     });
 
-    // Inicializar
-    renderCategories();
-    renderProducts(products);
+    // Search/Sort handlers
+    search.addEventListener('input', ()=> filterAndSearch());
+    category.addEventListener('change', ()=> filterAndSearch());
+    sortSelect.addEventListener('change', ()=> filterAndSearch());
+    clear.addEventListener('click', ()=>{
+      search.value = ''; category.value = ''; sortSelect.value = '';
+      render(productos);
+    });
+
+    // Navbar quick buttons
+    document.getElementById('btn-contact').addEventListener('click', ()=>{
+      const text = "Hola NeoForge3D, me interesa recibir información general y precios.";
+      window.open(waBase(text),'_blank');
+    });
+    document.getElementById('btn-catalog').addEventListener('click', ()=>{ window.scrollTo({top:document.getElementById('catalog').offsetTop - 40, behavior:'smooth'})});
+    document.getElementById('btn-sobre').addEventListener('click', ()=>{ alert('NeoForge3D - Producción aditiva y soluciones 3D. Contáctanos por WhatsApp.'); });
+
+    // Floating WhatsApp
+    waFab.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const text = "Hola NeoForge3D, deseo más información sobre sus servicios y cotizaciones.";
+      window.open(waBase(text),'_blank');
+    });
+
+    // Inicializar catálogo
+    render(productos);
+
+    // Accesibilidad: cerrar modal con Esc
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true') } });
   </script>
 </body>
 </html>
-
-
