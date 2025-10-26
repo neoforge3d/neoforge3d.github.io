@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NeoForge3D — Catálogo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>NeoForge3D — Catálogo (móvil)</title>
   <meta name="description" content="Catálogo de productos impresos en 3D | NeoForge3D" />
   <style>
     :root{
@@ -11,109 +11,118 @@
       --bg2:#071428;
       --neon:#00ffea;
       --accent:#7c4dff;
-      --glass: rgba(255,255,255,0.04);
+      --muted:#a9b0be;
       --card: rgba(255,255,255,0.03);
-      --muted: #a9b0be;
-      --radius:14px;
+      --touch:56px; /* tamaño mínimo táctil recomendado */
       --maxw:1200px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
+    /* Base */
     html,body{height:100%;margin:0;background:
-      radial-gradient(1200px 600px at 10% 10%, rgba(124,77,255,0.08), transparent 10%),
-      radial-gradient(800px 400px at 90% 80%, rgba(0,255,234,0.03), transparent 10%),
+      radial-gradient(1200px 600px at 10% 10%, rgba(124,77,255,0.06), transparent 10%),
+      radial-gradient(800px 400px at 90% 80%, rgba(0,255,234,0.02), transparent 10%),
       linear-gradient(180deg,var(--bg1),var(--bg2)); color:#e8f0ff; -webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--maxw);margin:32px auto;padding:28px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 10px 40px rgba(2,6,23,0.6);backdrop-filter: blur(6px);}
+    .wrap{max-width:var(--maxw);margin:20px auto;padding:20px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 8px 36px rgba(2,6,23,0.6);backdrop-filter: blur(6px);}
 
-    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{
-      width:56px;height:56px;border-radius:12px;background:
-      conic-gradient(from 220deg, var(--accent), var(--neon));display:flex;align-items:center;justify-content:center;
-      box-shadow:0 6px 18px rgba(0,0,0,0.5), 0 0 18px rgba(124,77,255,0.08) inset;
-      color:#071428;font-weight:700;font-size:18px;
-    }
-    .title{line-height:1}
-    .title h1{margin:0;font-size:18px;letter-spacing:0.6px}
-    .title p{margin:0;margin-top:2px;color:var(--muted);font-size:13px}
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:10px;background:conic-gradient(from 220deg, var(--accent), var(--neon));display:flex;align-items:center;justify-content:center;color:#071428;font-weight:800;font-size:16px;box-shadow:0 6px 18px rgba(0,0,0,0.45)}
+    .title h1{margin:0;font-size:16px}
+    .title p{margin:0;color:var(--muted);font-size:12px}
 
-    nav{display:flex;gap:10px;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      padding:10px 14px;border-radius:12px;color:var(--neon);border:1px solid rgba(0,255,234,0.08);text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;
-      transition:transform .12s ease, box-shadow .12s;
-    }
-    .btn:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,255,234,0.06)}
-    .btn.secondary{color:#cfcfff;border:1px solid rgba(124,77,255,0.08);background:transparent}
+    nav{display:flex;gap:8px;align-items:center}
+    .nav-link{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;color:var(--neon);background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(0,255,234,0.06);font-weight:600;text-decoration:none}
+    .nav-link.secondary{color:#cfcfff;border:1px solid rgba(124,77,255,0.06);background:transparent}
+
+    /* Mobile menu button */
+    .menu-btn{display:none;background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--neon);height:var(--touch);min-width:var(--touch);align-items:center;justify-content:center}
 
     /* Hero */
-    .hero{display:flex;align-items:center;justify-content:space-between;margin-top:22px;gap:20px}
-    .hero-left{max-width:640px}
-    .hero h2{margin:0;font-size:32px;line-height:1.02}
-    .hero p{color:var(--muted);margin-top:8px;font-size:15px}
-    .searchbar{margin-top:16px;display:flex;gap:8px;align-items:center}
-    .searchbar input{
-      flex:1;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:14px;
-      outline:none;box-shadow:inset 0 0 18px rgba(0,0,0,0.4);
+    .hero{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:12px}
+    .hero-left{flex:1;min-width:0}
+    .hero h2{margin:0;font-size:22px;line-height:1.04}
+    .hero p{color:var(--muted);margin-top:8px;font-size:13px}
+    .searchbar{margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .searchbar input, .searchbar select{
+      padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:14px;outline:none;
+      box-shadow:inset 0 0 18px rgba(0,0,0,0.35);
     }
-    .searchbar .select{
-      padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);color:var(--muted)
-    }
+    .searchbar .select{min-width:120px}
+    .searchbar .btn{padding:10px 12px}
 
-    .hero-right{
-      width:220px;height:160px;border-radius:16px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(124,77,255,0.02));
-      display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(124,77,255,0.04);position:relative;overflow:hidden;
-      border:1px solid rgba(255,255,255,0.02)
-    }
-    .neon-ring{position:absolute;inset:-30% -20% auto auto;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(0,255,234,0.14), transparent 20%);filter:blur(18px);opacity:0.9;}
-    .hero-right img{width:70%;transform:rotate(-10deg);filter:drop-shadow(0 12px 30px rgba(0,0,0,0.7))}
+    .hero-right{width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(124,77,255,0.02));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+    .hero-right img{width:70%;transform:rotate(-8deg);filter:drop-shadow(0 10px 22px rgba(0,0,0,0.6))}
 
-    /* Grid */
-    .controls{display:flex;align-items:center;justify-content:space-between;margin-top:26px;gap:12px}
+    /* Controls & Grid */
+    .controls{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:12px}
     .filters{display:flex;gap:8px;flex-wrap:wrap}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:14px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:12px}
 
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);
-      transition:transform .16s ease, box-shadow .16s ease;
-      display:flex;flex-direction:column;gap:12px;min-height:320px;
+      padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .14s ease, box-shadow .14s ease;display:flex;flex-direction:column;gap:10px;
     }
-    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
-    .card img{width:100%;height:140px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
     .meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .meta h3{margin:0;font-size:16px}
-    .price{color:var(--neon);font-weight:700}
+    .meta h3{margin:0;font-size:15px}
+    .price{color:var(--neon);font-weight:800}
     .tags{display:flex;gap:6px;flex-wrap:wrap}
     .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
 
-    /* Actions: botones reducidos (aprox. mitad del tamaño original visual) */
+    /* Actions (mobile-friendly touch targets) */
     .actions{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
-    .actions .btn{flex:1 1 calc(50% - 8px);padding:8px 10px;border-radius:10px;font-size:13px}
-    .primary{background:linear-gradient(90deg,var(--neon),var(--accent));color:#071428;font-weight:700;border:none}
+    .actions .btn{flex:1 1 calc(50% - 8px);padding:12px 10px;border-radius:12px;font-size:15px;min-height:var(--touch);display:inline-flex;align-items:center;justify-content:center}
+    .primary{background:linear-gradient(90deg,var(--neon),var(--accent));color:#071428;font-weight:800;border:none}
     .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#cfeff0}
-    .qty-input{width:86px;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;text-align:center}
+    .secondary{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);color:#cfcfff;border:1px solid rgba(124,77,255,0.06)}
+
+    .qty-area{display:flex;gap:8px;align-items:center}
+    .qty-input{width:96px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;text-align:center;font-size:15px;height:44px}
 
     /* Modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
-    .modal{width:100%;max-width:920px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:18px;color:inherit}
-    .modal img{width:48%;height:auto;border-radius:10px;object-fit:cover}
-    .modal .info{flex:1;display:flex;flex-direction:column;gap:12px}
-    .close{margin-left:auto;background:transparent;border:none;color:var(--muted);font-weight:700;cursor:pointer}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.65);display:none;align-items:center;justify-content:center;padding:12px;z-index:60}
+    .modal{width:100%;max-width:920px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:12px;color:inherit;box-shadow:0 18px 60px rgba(2,6,23,0.6)}
+    .modal img{width:46%;height:auto;border-radius:10px;object-fit:cover}
+    .modal .info{flex:1;display:flex;flex-direction:column;gap:10px}
+    .close{background:transparent;border:none;color:var(--muted);font-weight:800;cursor:pointer;padding:8px;border-radius:8px}
 
     /* Floating WhatsApp */
-    .wa-fab{position:fixed;right:20px;bottom:20px;background:linear-gradient(180deg,#00e5c9,#00bfa5);color:#061018;padding:14px;border-radius:999px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5);z-index:80;text-decoration:none}
-    .wa-fab span{font-weight:700}
+    .wa-fab{position:fixed;right:16px;bottom:16px;background:linear-gradient(180deg,#00e5c9,#00bfa5);color:#061018;padding:12px 16px;border-radius:999px;display:flex;align-items:center;gap:10px;box-shadow:0 14px 40px rgba(0,0,0,0.55);z-index:80;text-decoration:none;font-weight:800}
+    .wa-fab svg{transform:translateY(1px)}
+    .wa-fab span{font-size:15px}
 
-    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center;padding:12px 0}
+    footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center;padding:10px 0}
 
+    /* Mobile adjustments */
     @media (max-width:720px){
+      .wrap{margin:8px;padding:12px;border-radius:0;min-height:100vh}
+      header{align-items:center}
+      .menu-btn{display:flex}
+      nav{position:fixed;left:0;right:0;top:0;height:100vh;transform:translateY(-120%);background:linear-gradient(180deg, rgba(7,20,40,0.98), rgba(2,6,23,0.98));backdrop-filter: blur(8px);flex-direction:column;padding:18px;gap:14px;z-index:100;border-bottom-left-radius:12px;border-bottom-right-radius:12px}
+      nav.open{transform:translateY(0);transition:transform .28s cubic-bezier(.2,.9,.2,1)}
+      nav .nav-link{width:100%;justify-content:flex-start;padding:14px;font-size:16px}
       .hero{flex-direction:column;align-items:flex-start}
-      .hero-right{width:100%;height:140px}
-      .modal{flex-direction:column}
-      .modal img{width:100%}
+      .hero-right{width:100%;height:140px;border-radius:10px}
+      .grid{grid-template-columns:1fr;gap:12px}
+      .card img{height:220px}
+      .modal{flex-direction:column;padding:12px;border-radius:12px;max-height:92vh;overflow:auto}
+      .modal img{width:100%;height:auto;border-radius:10px}
+      .modal .info{padding-bottom:8px}
       .actions .btn{flex:1 1 100%}
+      .wa-fab{right:12px;left:auto;bottom:12px;padding:12px 18px;border-radius:999px;font-size:15px}
+      .searchbar input{flex-basis:100%}
+      .searchbar .select{min-width:48%}
     }
+
+    /* Desktop small tweaks */
+    @media (min-width:721px){
+      nav{transform:none;position:static;padding:0;height:auto;flex-direction:row;background:transparent}
+      .menu-btn{display:none}
+    }
+
   </style>
 </head>
 <body>
@@ -123,24 +132,30 @@
         <div class="logo">N3D</div>
         <div class="title">
           <h1>NeoForge3D</h1>
-          <p>Impresión 3D, prototipos y piezas personalizadas</p>
+          <p>Impresión 3D · Prototipos · Piezas</p>
         </div>
       </div>
-      <nav>
-        <a class="btn" id="btn-catalog">Catálogo</a>
-        <a class="btn secondary" id="btn-sobre">Sobre nosotros</a>
-        <a class="btn" id="btn-contact">Contactar</a>
+
+      <!-- Mobile menu button -->
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Abrir menú">
+        ☰
+      </button>
+
+      <nav id="mainNav" aria-hidden="true">
+        <a class="nav-link" id="btn-catalog">Catálogo</a>
+        <a class="nav-link secondary" id="btn-sobre">Sobre nosotros</a>
+        <a class="nav-link" id="btn-contact">Contactar</a>
       </nav>
     </header>
 
-    <section class="hero">
+    <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-left">
-        <h2>Diseños, precisión y materialidad para la próxima era</h2>
-        <p>NeoForge3D ofrece piezas personalizadas, prototipos funcionales y producción a medida. Solicita cotización o compra directamente por WhatsApp.</p>
+        <h2 id="heroTitle">Diseños, precisión y materialidad para la próxima era</h2>
+        <p>NeoForge3D ofrece piezas personalizadas y producción a medida. Solicita cotización o compra por WhatsApp.</p>
 
         <div class="searchbar" role="search">
-          <input id="search" placeholder="Buscar producto, ejemplo: 'robot', 'drone', 'llavero'..." />
-          <select id="category" class="select">
+          <input id="search" placeholder="Buscar producto (ej. robot, llavero, engranaje)..." />
+          <select id="category" class="select" aria-label="Categoría">
             <option value="">Todos</option>
             <option value="decor">Decoración</option>
             <option value="industrial">Industrial</option>
@@ -149,28 +164,27 @@
           </select>
           <select id="sort" class="select" title="Ordenar por precio">
             <option value="">Ordenar</option>
-            <option value="low">Precio: menor a mayor</option>
-            <option value="high">Precio: mayor a menor</option>
+            <option value="low">Precio: menor → mayor</option>
+            <option value="high">Precio: mayor → menor</option>
           </select>
-          <button class="btn" id="clear">Limpiar</button>
+          <button class="nav-link" id="clear" style="background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.03)">Limpiar</button>
         </div>
       </div>
 
-      <div class="hero-right">
-        <div class="neon-ring"></div>
-        <img src="images/hero-sample.png" alt="NeoForge3D muestra" />
+      <div class="hero-right" aria-hidden="false">
+        <img src="images/hero-sample.png" alt="Muestra NeoForge3D">
       </div>
     </section>
 
     <section class="controls">
-      <div class="filters">
-        <button class="btn secondary" data-filter="">Todos</button>
-        <button class="btn secondary" data-filter="decor">Decoración</button>
-        <button class="btn secondary" data-filter="industrial">Industrial</button>
-        <button class="btn secondary" data-filter="prototipo">Prototipo</button>
-        <button class="btn secondary" data-filter="accesorio">Accesorio</button>
+      <div class="filters" role="tablist" aria-label="Filtros">
+        <button class="nav-link secondary" data-filter="">Todos</button>
+        <button class="nav-link secondary" data-filter="decor">Decoración</button>
+        <button class="nav-link secondary" data-filter="industrial">Industrial</button>
+        <button class="nav-link secondary" data-filter="prototipo">Prototipo</button>
+        <button class="nav-link secondary" data-filter="accesorio">Accesorio</button>
       </div>
-      <div style="color:var(--muted);font-size:13px">Envío y cotizaciones vía WhatsApp</div>
+      <div style="color:var(--muted);font-size:13px">Envíos y cotizaciones vía WhatsApp</div>
     </section>
 
     <main id="catalog" class="grid" aria-live="polite">
@@ -187,30 +201,31 @@
     <div class="modal" role="dialog" aria-modal="true">
       <img id="modal-img" src="" alt="">
       <div class="info">
-        <div style="display:flex;gap:12px;align-items:center">
-          <h3 id="modal-title" style="margin:0"></h3>
-          <button class="close" id="modal-close">Cerrar ✕</button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <h3 id="modal-title" style="margin:0;font-size:18px"></h3>
+          <button class="close" id="modal-close" aria-label="Cerrar">✕</button>
         </div>
-        <div id="modal-desc" style="color:var(--muted)"></div>
-        <div style="display:flex;gap:12px;align-items:center">
-          <div class="price" id="modal-price"></div>
+        <div id="modal-desc" style="color:var(--muted);font-size:14px"></div>
+
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <div class="price" id="modal-price" style="font-size:18px"></div>
           <div style="color:var(--muted);font-size:13px">Materiales: <span id="modal-material"></span></div>
         </div>
 
-        <div style="display:flex;gap:10px;align-items:center">
+        <div style="display:flex;gap:10px;align-items:center" aria-label="Cantidad">
           <label style="color:var(--muted);font-size:13px">Cantidad:</label>
           <input id="modal-qty" class="qty-input" type="number" min="1" value="1" />
         </div>
 
-        <div style="display:flex;gap:10px;margin-top:auto">
-          <button class="btn primary" id="btn-buy-modal">Comprar por WhatsApp</button>
-          <button class="btn ghost" id="btn-quote-modal">Solicitar cotización</button>
+        <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
+          <button class="primary" id="btn-buy-modal">Comprar por WhatsApp</button>
+          <button class="ghost" id="btn-quote-modal">Solicitar cotización</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- WhatsApp flotante -->
+  <!-- WhatsApp flotante (grande en móvil) -->
   <a class="wa-fab" id="wa-fab" href="#" target="_blank" rel="noopener">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M21 16.5v3a1.5 1.5 0 0 1-1.7 1.48c-9.38-.97-16.92-8.52-17.9-17.9A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.64c0 .3-.05.6-.15.88l-.9 2.33a1.5 1.5 0 0 0 .35 1.6l2.2 2.2a1.5 1.5 0 0 0 1.6.35l2.33-.9c.28-.1.58-.15.88-.15A1.5 1.5 0 0 1 21 16.5z" fill="#061018" />
@@ -220,10 +235,10 @@
 
   <script>
     // CONFIG: reemplaza por tu número en formato internacional sin '+' ni espacios
-    const PHONE = "5525021262"; // EJ: "521234567890" (52 = México)
+    const PHONE = "5525021262"; // ej: "521234567890"
     const waBase = (text) => "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text);
 
-    // Productos (agregar propiedad precioNum para ordenar)
+    // Productos (incluye precioNum para ordenar)
     const productos = [
       { id: "ng3d-001", nombre: "Mini Robot Neo", imagen: "images/mini-robot.jpg", precio: "USD 45", precioNum: 45, categoria: "decor", material: "PLA / Resina", descripcion: "Figura decorativa con articulaciones impresas. Ideal para prototipos y exposición." },
       { id: "ng3d-002", nombre: "Soporte Drone - Light", imagen: "images/drone-frame.jpg", precio: "USD 120", precioNum: 120, categoria: "industrial", material: "Nylon reforzado", descripcion: "Armazón ligero para drones, optimizado para ABS o nylon. Diseño resistente y modular." },
@@ -252,11 +267,21 @@
     const sortSelect = document.getElementById('sort');
     const modalQty = document.getElementById('modal-qty');
 
-    // Renderiza productos
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mainNav = document.getElementById('mainNav');
+    menuBtn.addEventListener('click', ()=>{
+      const open = mainNav.classList.toggle('open');
+      mainNav.setAttribute('aria-hidden', !open);
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.textContent = open ? '✕' : '☰';
+    });
+
+    // Renderiza productos (touch-friendly)
     function render(list){
       catalog.innerHTML = '';
       if(list.length === 0){
-        catalog.innerHTML = '<div style="color:var(--muted);padding:20px;border-radius:12px;background:var(--card);grid-column:1/-1">No se encontraron productos.</div>';
+        catalog.innerHTML = '<div style="color:var(--muted);padding:18px;border-radius:10px;background:var(--card);grid-column:1/-1">No se encontraron productos.</div>';
         return;
       }
       list.forEach(p=>{
@@ -274,12 +299,12 @@
             <div class="tag">${p.material}</div>
           </div>
 
-          <div style="display:flex;gap:10px;align-items:center">
+          <div style="display:flex;gap:10px;align-items:center;justify-content:flex-start;flex-wrap:wrap;margin-top:6px">
             <label style="color:var(--muted);font-size:13px;margin-right:6px">Cantidad:</label>
             <input type="number" min="1" value="1" class="qty-input qty" data-id="${p.id}">
           </div>
 
-          <div class="actions">
+          <div class="actions" style="margin-top:8px">
             <button class="btn primary" data-buy="${p.id}">Comprar</button>
             <button class="btn ghost" data-quote="${p.id}">Cotizar</button>
             <button class="btn secondary" data-view="${p.id}">Ver</button>
@@ -309,7 +334,7 @@
       render(filtered);
     }
 
-    // Delegate clicks en catálogo
+    // Delegación de eventos en el catálogo (comprar, cotizar, ver)
     catalog.addEventListener('click', (e)=>{
       const buyId = e.target.getAttribute('data-buy');
       const quoteId = e.target.getAttribute('data-quote');
@@ -317,17 +342,16 @@
 
       if(buyId){
         const prod = productos.find(x=>x.id===buyId);
-        // tomar cantidad desde el input asociado
         const qtyInput = document.querySelector(`.qty[data-id="${buyId}"]`);
         const qty = (qtyInput && Math.max(1, parseInt(qtyInput.value || 1))) || 1;
-        const text = `Hola NeoForge3D, deseo comprar el producto: ${prod.nombre} (${prod.id}) - Precio: ${prod.precio}. Cantidad: ${qty}. ¿Está disponible?`;
-        window.open(waBase(text),'_blank');
+        const text = `Hola NeoForge3D, deseo comprar: ${prod.nombre} (${prod.id}) - Precio: ${prod.precio}. Cantidad: ${qty}. ¿Disponible?`;
+        window.open(waBase(text), '_blank');
       } else if(quoteId){
         const prod = productos.find(x=>x.id===quoteId);
         const qtyInput = document.querySelector(`.qty[data-id="${quoteId}"]`);
         const qty = (qtyInput && Math.max(1, parseInt(qtyInput.value || 1))) || 1;
-        const text = `Hola NeoForge3D, solicito cotización para: ${prod.nombre} (${prod.id}). Cantidad: ${qty}, acabado ___, tiempo de entrega ___.`;
-        window.open(waBase(text),'_blank');
+        const text = `Hola NeoForge3D, solicito cotización para: ${prod.nombre} (${prod.id}). Cantidad: ${qty}, acabado ___, plazo ___`;
+        window.open(waBase(text), '_blank');
       } else if(viewId){
         openModal(productos.find(x=>x.id===viewId));
       }
@@ -346,7 +370,7 @@
       modalQty.value = 1;
       backdrop.style.display = 'flex';
       backdrop.setAttribute('aria-hidden','false');
-
+      // bind actions
       btnBuyModal.onclick = ()=>{
         const qty = Math.max(1, parseInt(modalQty.value || 1));
         const text = `Hola NeoForge3D, deseo comprar: ${prod.nombre} (${prod.id}) - Precio: ${prod.precio}. Cantidad: ${qty}`;
@@ -358,8 +382,8 @@
         window.open(waBase(text),'_blank');
       };
     }
-    modalClose.addEventListener('click', ()=>{backdrop.style.display='none';backdrop.setAttribute('aria-hidden','true')});
-    backdrop.addEventListener('click',(e)=>{ if(e.target === backdrop){ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true') } });
+    modalClose.addEventListener('click', ()=>{ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true'); });
+    backdrop.addEventListener('click',(e)=>{ if(e.target === backdrop){ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true'); } });
 
     // Filtros rápidos
     filters.forEach(btn=>{
@@ -367,10 +391,12 @@
         const cat = btn.getAttribute('data-filter');
         category.value = cat || '';
         filterAndSearch();
+        // close mobile nav if open
+        if(mainNav.classList.contains('open')) { mainNav.classList.remove('open'); menuBtn.textContent='☰'; menuBtn.setAttribute('aria-expanded','false'); mainNav.setAttribute('aria-hidden','true'); }
       })
     });
 
-    // Search/Sort handlers
+    // Handlers
     search.addEventListener('input', ()=> filterAndSearch());
     category.addEventListener('change', ()=> filterAndSearch());
     sortSelect.addEventListener('change', ()=> filterAndSearch());
@@ -379,13 +405,15 @@
       render(productos);
     });
 
-    // Navbar quick buttons
+    // Navbar actions
     document.getElementById('btn-contact').addEventListener('click', ()=>{
-      const text = "Hola NeoForge3D, me interesa recibir información general y precios.";
+      const text = "Hola NeoForge3D, me interesa recibir información y precios.";
       window.open(waBase(text),'_blank');
+      // close nav on mobile
+      if(mainNav.classList.contains('open')) { mainNav.classList.remove('open'); menuBtn.textContent='☰'; menuBtn.setAttribute('aria-expanded','false'); mainNav.setAttribute('aria-hidden','true'); }
     });
-    document.getElementById('btn-catalog').addEventListener('click', ()=>{ window.scrollTo({top:document.getElementById('catalog').offsetTop - 40, behavior:'smooth'})});
-    document.getElementById('btn-sobre').addEventListener('click', ()=>{ alert('NeoForge3D - Producción aditiva y soluciones 3D. Contáctanos por WhatsApp.'); });
+    document.getElementById('btn-catalog').addEventListener('click', ()=>{ window.scrollTo({top:document.getElementById('catalog').offsetTop - 20, behavior:'smooth'}); if(mainNav.classList.contains('open')) { mainNav.classList.remove('open'); menuBtn.textContent='☰'; menuBtn.setAttribute('aria-expanded','false'); mainNav.setAttribute('aria-hidden','true'); }});
+    document.getElementById('btn-sobre').addEventListener('click', ()=>{ alert('NeoForge3D - Producción aditiva y soluciones 3D. Contáctanos por WhatsApp.'); if(mainNav.classList.contains('open')) { mainNav.classList.remove('open'); menuBtn.textContent='☰'; menuBtn.setAttribute('aria-expanded','false'); mainNav.setAttribute('aria-hidden','true'); }});
 
     // Floating WhatsApp
     waFab.addEventListener('click', (e)=>{
@@ -398,8 +426,7 @@
     render(productos);
 
     // Accesibilidad: cerrar modal con Esc
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true') } });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true'); if(mainNav.classList.contains('open')){ mainNav.classList.remove('open'); menuBtn.textContent='☰'; menuBtn.setAttribute('aria-expanded','false'); mainNav.setAttribute('aria-hidden','true'); } } });
   </script>
 </body>
 </html>
-
